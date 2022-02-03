@@ -34,38 +34,67 @@
         <button id="next">Next color</button>
     </div>
     <script>
-        import { createStore } from 'redux'
+        
 
         const ESTADO_INICIAL = {
             colors: ['white','black','red','green','blue','yellow'],
             index: 0,
         };
 
-        const reducer = (state = ESTADO_INICIAL)=> {
+        const changeB = () => {
+  return{ 
+    type:'NEXT_COLOR'
+  }
+}
+
+const changeA = () => {
+  return{ 
+    type:'PREVIOUS_COLORS'
+  }
+}       
+
+        const reducer = (state = ESTADO_INICIAL, action) => {
             switch (action.type) {
     case 'NEXT_COLOR':
       return {
           ...state, 
-          index: state.index >= 5 ? + 1 : 0 
-
+          index: state.index >= 5 ?  0 : state.index+1
         }
 
     case 'PREVIOUS_COLORS':
     return {
           ...state, 
-          index: state.index >= 0 ? - 1 : 5
-
+          index: state.index <= 0 ? 5 : state.index-1
         }
 
-    default:
+    default:{
       return state;
             }
             
-        };
+        }
+    }
+    const store = Redux.createStore(reducer);
 
-        const store = createStore(reducer);
+        store.subscribe(() => {
+  const cont = document.getElementById('container');
+  const {colors, index} = store.getState();
+  document.getElementById('value').innerText = colors[index]
+  cont.style.backgroundColor = colors[index]
 
+
+})
+
+        const buttonA = document.getElementById('previous')
+buttonA.addEventListener('click', () => {
+  store.dispatch(changeA())
+})
+
+        const buttonB = document.getElementById('next')
+buttonB.addEventListener('click', () => {
+  store.dispatch(changeB())
+})
         
     </script>
 </body>
 </html>
+

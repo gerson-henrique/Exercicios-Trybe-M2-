@@ -44,4 +44,11 @@ store.subscribe(() => {
 const buttonE = document.getElementById('light-switch')
 buttonE.addEventListener('click', () => {
   store.dispatch(changeTheme())
-})
+})''
+
+
+//Chamamos A Store
+//Imeplementamos o Reducer da Store (Definir como os states serão alterados)
+//Reduce deve Startarseus states
+//use os ouvidores de evento para despachar 
+//Atualize seus inscritos com as mudanças

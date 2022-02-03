@@ -26,6 +26,7 @@ const fazerLogin = (email) => ({
   
   store.dispatch(fazerLogin("alguem@email.com"));
   
+  
   console.log(store.getState());
   
   // { login: true, email: 'alguem@email.com' }
